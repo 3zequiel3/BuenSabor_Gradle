@@ -1,9 +1,8 @@
 package org.example.Entities.Articles;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.example.Entities.Base;
 import org.example.Entities.Enums.TipoPromocion;
 import org.example.Entities.Geography.Sucursal;
@@ -17,7 +16,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-
+@Entity
+@Table(name = "promociones")
+@SuperBuilder
 public class Promocion extends Base {
     private String denominacion;
     private LocalDate fechaDesde;
@@ -31,11 +32,16 @@ public class Promocion extends Base {
     private TipoPromocion tipoPromocion;
 
     //n:n Sucursal
+    @ManyToMany
+    @JoinTable(name = "sucursal_id", joinColumns = @JoinColumn(name = "promocion_id"), inverseJoinColumns = @JoinColumn(name = "sucursal_id"))
     private List<Sucursal> sucursales = new ArrayList<>();
     // n:n Articulo
+    @ManyToMany
+    @JoinTable(name = "articulo_id", joinColumns = @JoinColumn(name = "promocion_id"), inverseJoinColumns = @JoinColumn(name = "articulo_id"))
     private List<Articulo> articulos = new ArrayList<>();
 
     //Imagen
+    @OneToMany(mappedBy = "promocion", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Imagen> imagenes = new ArrayList<>();
 
 }

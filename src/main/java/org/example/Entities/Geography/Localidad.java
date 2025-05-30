@@ -1,6 +1,10 @@
 package org.example.Entities.Geography;
 
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,11 +17,15 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@Entity
 public class Localidad extends Base {
     private String nombre;
     //Domicilio
+    @OneToMany
     private List<Domicilio> domicilios = new ArrayList<>();
     //Provincia
+    @ManyToOne
+    @JoinColumn(name = "provincia_id")
     private Provincia provincia;
 
     //Metodos

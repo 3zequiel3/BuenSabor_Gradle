@@ -1,17 +1,17 @@
 package org.example.Entities.Articles;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import jakarta.persistence.*;
 import org.example.Entities.Base;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-
-
+@Entity
 public class UnidadMedida extends Base {
+    @Column(unique = true)
     private String denominacion;
+    @ManyToOne
+    private Articulo articulo;
 }

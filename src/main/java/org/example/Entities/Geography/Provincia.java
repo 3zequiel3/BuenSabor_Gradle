@@ -1,4 +1,5 @@
 package org.example.Entities.Geography;
+import jakarta.persistence.*;
 import lombok.*;
 import org.example.Entities.Base;
 
@@ -8,11 +9,14 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-
+@Entity
 public class Provincia extends Base {
     private String nombre;
+    @ManyToOne
+    @JoinColumn(name = "pais_id")
     private Pais pais;
 
+    @OneToMany(mappedBy = "provincia",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Localidad> localidades = new ArrayList<>();
 
     //Metodos

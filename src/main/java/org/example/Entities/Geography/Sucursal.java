@@ -1,4 +1,6 @@
 package org.example.Entities.Geography;
+import jakarta.persistence.*;
+import lombok.experimental.SuperBuilder;
 import org.example.Entities.Articles.Promocion;
 import org.example.Entities.Base;
 import lombok.*;
@@ -11,18 +13,30 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@Entity
+@Table(name = "sucursales")
+@SuperBuilder
 public class Sucursal extends Base {
+    @Column(unique = true, nullable = false)
     private String nombre;
+    @Column(unique = true, nullable = false)
     private LocalTime horarioApertura;
+    @Column(nullable = false)
     private LocalTime horarioCierre;
     //Empresa
+    @ManyToOne
+    @JoinTable(name = "empresa_id", joinColumns = @JoinColumn(name = "sucursal_id"), inverseJoinColumns = @JoinColumn(name = "empresa_id"))
     private Empresa empresa;
     //Domicilio
+    @OneToOne(cascade = CascadeType.ALL , orphanRemoval = true)
+    @JoinColumn(name = "domicilio_id")
     private Domicilio domicilio;
     //Promociones
+    @ManyToMany(mappedBy = "sucursal", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Promocion> promociones = new ArrayList<>();
     //Pedidos
-    private List<Pedido> pedidos = new ArrayList<>();
+    @OneToMany(mappedBy = "sucursal", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Pedido> pedidos = new ArrayList<>()    ;
 
     //Metodos
         //Promocion

@@ -1,5 +1,6 @@
 package org.example.Entities.Geography;
 
+import jakarta.persistence.*;
 import lombok.*;
 import org.example.Entities.Base;
 import org.example.Entities.Orders.Pedido;
@@ -11,16 +12,21 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@Entity
 
 public class Domicilio extends Base {
     private String calle;
     private int numero;
     private int cp;
     //Localidad
+    @ManyToOne
     private Localidad localidad;
     //Pedidos
+    @OneToMany
     private List<Pedido> pedidos = new ArrayList<>();
     //Cliente
+    @ManyToMany(mappedBy = "domicilios")
+    @JoinColumn(name = "cliente_id")
     private List<Cliente> clientes = new ArrayList<>();
 
     //Metodos
