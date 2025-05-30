@@ -20,12 +20,19 @@ import java.util.List;
 @Table(name = "promociones")
 @SuperBuilder
 public class Promocion extends Base {
+    @Column(unique = true)
     private String denominacion;
+    @Column (unique = true)
     private LocalDate fechaDesde;
+    @Column (unique = true)
     private LocalDate fechaHasta;
+    @Column (unique = true)
     private LocalTime horaDesde;
+    @Column (unique = true)
     private LocalTime horaHasta;
+    @Column (unique = true)
     private String descripcionDescuento;
+    @Column (unique = true)
     private double precioPromocional;
 
     //Tipo Promocion Enum
