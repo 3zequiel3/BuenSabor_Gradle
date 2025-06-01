@@ -41,14 +41,17 @@ public class Promocion extends Base {
     //n:n Sucursal
     @ManyToMany
     @JoinTable(name = "sucursal_id", joinColumns = @JoinColumn(name = "promocion_id"), inverseJoinColumns = @JoinColumn(name = "sucursal_id"))
+    @Builder.Default
     private List<Sucursal> sucursales = new ArrayList<>();
     // n:n Articulo
     @ManyToMany
     @JoinTable(name = "articulo_id", joinColumns = @JoinColumn(name = "promocion_id"), inverseJoinColumns = @JoinColumn(name = "articulo_id"))
+    @Builder.Default
     private List<Articulo> articulos = new ArrayList<>();
 
     //Imagen
     @OneToMany(mappedBy = "promocion", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<Imagen> imagenes = new ArrayList<>();
 
 }

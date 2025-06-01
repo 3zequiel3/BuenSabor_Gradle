@@ -2,6 +2,7 @@ package org.example.Entities.Geography;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.example.Entities.Base;
 import org.example.Entities.Orders.Pedido;
 import org.example.Entities.User.Cliente;
@@ -13,20 +14,22 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Entity
+@SuperBuilder
 
 public class Domicilio extends Base {
     private String calle;
     private int numero;
     private int cp;
     //Localidad
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Localidad localidad;
     //Pedidos
     @OneToMany
+    @Builder.Default
     private List<Pedido> pedidos = new ArrayList<>();
     //Cliente
     @ManyToMany(mappedBy = "domicilios")
-    @JoinColumn(name = "cliente_id")
+    @Builder.Default
     private List<Cliente> clientes = new ArrayList<>();
 
     //Metodos

@@ -11,6 +11,7 @@ import org.example.Entities.User.Cliente;
 @NoArgsConstructor
 @SuperBuilder
 @Entity
+@Table(name = "imagenes")
 public class Imagen extends Base{
     private String denominacion;
 

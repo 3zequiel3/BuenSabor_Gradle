@@ -13,5 +13,6 @@ public class UnidadMedida extends Base {
     @Column(unique = true)
     private String denominacion;
     @ManyToOne
+    @JoinColumn(name = "articulo_id")
     private Articulo articulo;
 }

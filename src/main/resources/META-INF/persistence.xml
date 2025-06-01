@@ -2,10 +2,29 @@
 <persistence xmlns="https://jakarta.ee/xml/ns/persistence"
              version="3.0">
 
-    <persistence-unit name="BuenSabor" transaction-type="RESOURCE_LOCAL">
-        <class>org.example.Entities.Geography.Sucursal</class>
-<!--        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>-->
+    <persistence-unit name="BuenSabor" transaction-type="RESOURCE_LOCAL" >
+        <class>org.example.Entities.Articles.Articulo</class>
+        <class>org.example.Entities.Articles.ArticuloInsumo</class>
+        <class>org.example.Entities.Articles.ArticuloManufacturado</class>
+        <class>org.example.Entities.Articles.ArticuloManufacturadoDetalle</class>
+        <class>org.example.Entities.Articles.Categoria</class>
+        <class>org.example.Entities.Articles.Promocion</class>
+        <class>org.example.Entities.Articles.UnidadMedida</class>
 
+        <class>org.example.Entities.Geography.Domicilio</class>
+        <class>org.example.Entities.Geography.Empresa</class>
+        <class>org.example.Entities.Geography.Localidad</class>
+        <class>org.example.Entities.Geography.Pais</class>
+        <class>org.example.Entities.Geography.Provincia</class>
+        <class>org.example.Entities.Geography.Sucursal</class>
+
+        <class>org.example.Entities.Orders.DetallePedido</class>
+        <class>org.example.Entities.Orders.Factura</class>
+        <class>org.example.Entities.Orders.Pedido</class>
+
+        <class>org.example.Entities.User.Cliente</class>
+        <class>org.example.Entities.User.Usuario</class>
+        <class>org.example.Entities.Imagen</class>
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/BuenSabor"/>

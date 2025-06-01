@@ -36,7 +36,7 @@ public class Pedido extends Base {
     private FormaPago formaPago;
     //DetallePedido
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinTable(name = "detalle_pedido_id", joinColumns = @JoinColumn(name = "pedido_id"), inverseJoinColumns = @JoinColumn(name = "detalle_pedido_id"))
+    @Builder.Default
     private List<DetallePedido> detallePedido = new ArrayList<>();
     //Cliente
     @ManyToOne(optional = false)

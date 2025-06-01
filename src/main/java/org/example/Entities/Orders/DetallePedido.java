@@ -8,6 +8,7 @@ import org.example.Entities.Base;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @Entity
 public class DetallePedido extends Base {
     private int cantidad;

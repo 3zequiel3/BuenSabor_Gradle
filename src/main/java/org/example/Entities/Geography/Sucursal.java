@@ -19,7 +19,7 @@ import java.util.List;
 public class Sucursal extends Base {
     @Column(unique = true, nullable = false)
     private String nombre;
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private LocalTime horarioApertura;
     @Column(nullable = false)
     private LocalTime horarioCierre;
@@ -32,10 +32,12 @@ public class Sucursal extends Base {
     @JoinColumn(name = "domicilio_id")
     private Domicilio domicilio;
     //Promociones
-    @ManyToMany(mappedBy = "sucursal", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToMany(mappedBy = "sucursales", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @Builder.Default
     private List<Promocion> promociones = new ArrayList<>();
     //Pedidos
     @OneToMany(mappedBy = "sucursal", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<Pedido> pedidos = new ArrayList<>()    ;
 
     //Metodos

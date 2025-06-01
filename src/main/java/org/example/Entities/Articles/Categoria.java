@@ -10,19 +10,19 @@ import java.util.Set;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Entity
-
 public class Categoria extends Base {
     private String denominacion;
 
-    //Categoria
     @ManyToOne
     @JoinColumn(name = "categoria_padre_id")
     private Categoria categoriaPadre;
 
-    @OneToMany(mappedBy = "categoriaPadre",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "categoriaPadre", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Categoria> categoriasHijas;
-    //Articulo
-    @OneToMany(mappedBy = "categoria",cascade = CascadeType.ALL,orphanRemoval = true)
+
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Articulo> articulos;
-    private Set<Categoria> categorias;
+
+    // private Set<Categoria> categorias;
 }
+

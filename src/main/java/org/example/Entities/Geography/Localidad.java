@@ -1,14 +1,9 @@
 package org.example.Entities.Geography;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.example.Entities.Base;
 
 import java.util.ArrayList;
@@ -17,14 +12,16 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@SuperBuilder
 @Entity
 public class Localidad extends Base {
     private String nombre;
     //Domicilio
     @OneToMany
+    @Builder.Default
     private List<Domicilio> domicilios = new ArrayList<>();
     //Provincia
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "provincia_id")
     private Provincia provincia;
 

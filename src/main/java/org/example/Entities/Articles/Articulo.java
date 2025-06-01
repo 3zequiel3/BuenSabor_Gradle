@@ -26,9 +26,10 @@ public abstract class Articulo extends Base {
     @OneToOne
     protected UnidadMedida unidadMedida;
     //Categoria
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "categoria_id")
     protected Categoria categoria;
     //Detalle Pedido
-    @OneToMany(mappedBy = "articulos")
+    @OneToMany(mappedBy = "articulo")
     private List<DetallePedido> detallePedidos;
 }

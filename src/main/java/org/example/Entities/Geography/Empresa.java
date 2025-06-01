@@ -1,6 +1,7 @@
 package org.example.Entities.Geography;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.example.Entities.Base;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Entity
+@SuperBuilder
 @Table(name = "empresas")
 public class Empresa extends Base {
     @Column(unique = true)
@@ -19,10 +21,11 @@ public class Empresa extends Base {
     @Column(unique = true)
     private String razonSocial;
     @Column(unique = true)
-    private int cuil;
+    private long cuil;
     //Sucursales
     @OneToMany(mappedBy = "empresa",cascade = CascadeType.ALL,orphanRemoval = true)
-    private ArrayList<Sucursal> sucursales;
+    @Builder.Default
+    private ArrayList<Sucursal> sucursales = new ArrayList<>()   ;
 
     //Metodos
         //Añadir
