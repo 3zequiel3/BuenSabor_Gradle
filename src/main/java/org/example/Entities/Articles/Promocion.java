@@ -5,13 +5,13 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.example.Entities.Base;
 import org.example.Entities.Enums.TipoPromocion;
-import org.example.Entities.Geography.Sucursal;
 import org.example.Entities.Imagen;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,38 +20,45 @@ import java.util.List;
 @Table(name = "promociones")
 @SuperBuilder
 public class Promocion extends Base {
-    @Column(unique = true)
+    @Column(nullable = false)
     private String denominacion;
-    @Column (unique = true)
+
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private LocalDate fechaDesde;
-    @Column (unique = true)
+
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private LocalDate fechaHasta;
-    @Column (unique = true)
+
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIME)
     private LocalTime horaDesde;
-    @Column (unique = true)
+
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIME)
     private LocalTime horaHasta;
-    @Column (unique = true)
+
+    @Column(nullable = false)
     private String descripcionDescuento;
-    @Column (unique = true)
+
+    @Column(nullable = false)
     private double precioPromocional;
 
     //Tipo Promocion Enum
     private TipoPromocion tipoPromocion;
 
-    //n:n Sucursal
-    @ManyToMany
-    @JoinTable(name = "sucursal_id", joinColumns = @JoinColumn(name = "promocion_id"), inverseJoinColumns = @JoinColumn(name = "sucursal_id"))
-    @Builder.Default
-    private List<Sucursal> sucursales = new ArrayList<>();
+
     // n:n Articulo
     @ManyToMany
-    @JoinTable(name = "articulo_id", joinColumns = @JoinColumn(name = "promocion_id"), inverseJoinColumns = @JoinColumn(name = "articulo_id"))
+    @JoinTable(name = "articulo_id",
+            joinColumns = @JoinColumn(name = "promocion_id"),
+            inverseJoinColumns = @JoinColumn(name = "articulo_id"))
     @Builder.Default
-    private List<Articulo> articulos = new ArrayList<>();
+    private Set<Articulo> articulos = new HashSet<>();
 
     //Imagen
-    @OneToMany(mappedBy = "promocion", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Builder.Default
-    private List<Imagen> imagenes = new ArrayList<>();
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Imagen imagen;
 
 }

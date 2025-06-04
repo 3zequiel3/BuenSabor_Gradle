@@ -1,6 +1,13 @@
 package org.example.Entities;
-import jakarta.persistence.*;
-import lombok.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.example.Entities.Articles.Promocion;
 import org.example.Entities.User.Cliente;
@@ -12,7 +19,7 @@ import org.example.Entities.User.Cliente;
 @SuperBuilder
 @Entity
 @Table(name = "imagenes")
-public class Imagen extends Base{
+public class Imagen extends Base {
     private String denominacion;
 
     @ManyToOne

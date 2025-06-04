@@ -1,7 +1,11 @@
 package org.example.Entities.Articles;
 
-import lombok.*;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.example.Entities.Base;
 
 @Data
@@ -12,7 +16,4 @@ import org.example.Entities.Base;
 public class UnidadMedida extends Base {
     @Column(unique = true)
     private String denominacion;
-    @ManyToOne
-    @JoinColumn(name = "articulo_id")
-    private Articulo articulo;
 }

@@ -7,6 +7,9 @@ import jakarta.persistence.Persistence;
 
 public class ConexionJPA {
     public static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("BuenSabor");
-    public static EntityManager getEmf(){ return emf.createEntityManager();}
-};
+
+    public static EntityManager getEmf() {
+        return emf.createEntityManager();
+    }
+}
 

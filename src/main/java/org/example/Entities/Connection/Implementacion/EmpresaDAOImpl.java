@@ -11,6 +11,7 @@ import org.example.Entities.Geography.Empresa;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 @Data
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
@@ -25,11 +26,11 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 
     @Override
     public void guardar(Empresa entidad) {
-        String sql=  "INSERT INTO empresas(nombre,razon_social,cuil) VALUES (?,?,?)";
-        try(PreparedStatement ps = this.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
-            ps.setString(1,entidad.getNombre());
-            ps.setString(2,entidad.getRazonSocial());
-            ps.setLong(3,entidad.getCuil());
+        String sql = "INSERT INTO empresas(nombre,razon_social,cuil) VALUES (?,?,?)";
+        try (PreparedStatement ps = this.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, entidad.getNombre());
+            ps.setString(2, entidad.getRazonSocial());
+            ps.setLong(3, entidad.getCuil());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -39,13 +40,14 @@ public class EmpresaDAOImpl implements EmpresaDAO {
             throw new RuntimeException(e);
         }
     }
+
     @Override
     public Empresa buscarPorId(Empresa entidad) {
-        String sql=  "SELECT * FROM empresas WHERE id=?";
-        try(PreparedStatement ps = this.con.prepareStatement(sql)){
-            ps.setInt(1,entidad.getId());
+        String sql = "SELECT * FROM empresas WHERE id=?";
+        try (PreparedStatement ps = this.con.prepareStatement(sql)) {
+            ps.setInt(1, entidad.getId());
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 Empresa empresa = new Empresa();
                 empresa.setId(rs.getInt("id"));
                 empresa.setNombre(rs.getString("nombre"));
@@ -62,10 +64,10 @@ public class EmpresaDAOImpl implements EmpresaDAO {
     @Override
     public List<Empresa> buscarTodos() {
         List<Empresa> empresas = new ArrayList<>();
-        String sql=  "SELECT * FROM empresas";
-        try(PreparedStatement ps = this.con.prepareStatement(sql)){
+        String sql = "SELECT * FROM empresas";
+        try (PreparedStatement ps = this.con.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Empresa empresa = new Empresa();
                 empresa.setId(rs.getInt("id"));
                 empresa.setNombre(rs.getString("nombre"));
@@ -73,7 +75,7 @@ public class EmpresaDAOImpl implements EmpresaDAO {
                 empresa.setCuil(rs.getInt("cuil"));
                 empresas.add(empresa);
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return empresas;
@@ -81,12 +83,12 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 
     @Override
     public void actualizar(Empresa entidad) {
-        String sql=  "UPDATE empresas SET nombre=?, razon_social=?, cuil=? WHERE id=?";
-        try(PreparedStatement ps = this.con.prepareStatement(sql)){
-            ps.setString(1,entidad.getNombre());
-            ps.setString(2,entidad.getRazonSocial());
-            ps.setLong(3,entidad.getCuil());
-            ps.setInt(4,entidad.getId());
+        String sql = "UPDATE empresas SET nombre=?, razon_social=?, cuil=? WHERE id=?";
+        try (PreparedStatement ps = this.con.prepareStatement(sql)) {
+            ps.setString(1, entidad.getNombre());
+            ps.setString(2, entidad.getRazonSocial());
+            ps.setLong(3, entidad.getCuil());
+            ps.setInt(4, entidad.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -95,9 +97,9 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 
     @Override
     public void eliminar(Empresa entidad) {
-        String sql=  "DELETE FROM empresas WHERE id=?";
-        try(PreparedStatement ps = this.con.prepareStatement(sql)){
-            ps.setInt(1,entidad.getId());
+        String sql = "DELETE FROM empresas WHERE id=?";
+        try (PreparedStatement ps = this.con.prepareStatement(sql)) {
+            ps.setInt(1, entidad.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

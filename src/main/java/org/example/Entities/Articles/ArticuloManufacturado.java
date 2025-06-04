@@ -1,20 +1,30 @@
 package org.example.Entities.Articles;
 
 
-import lombok.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@Entity
+@Table(name = "articulomanufacturado")
 
-public class ArticuloManufacturado extends Articulo{
+public class ArticuloManufacturado extends Articulo {
     private String descripcion;
     private int tiempoEstimadoMinutos;
     private String preparacion;
 
-    //ArticuloManufacturadoDetalle
-    private List<ArticuloManufacturadoDetalle> articuloManufacturadoDetalles = new ArrayList<>();
+    //Articulo Manufacturado Detalle Relacion OnetoMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "articulo_manufacturado_detalle_id")
+    private Set<ArticuloManufacturadoDetalle> articulos;
+
+
 }

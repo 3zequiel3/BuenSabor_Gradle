@@ -8,19 +8,19 @@ import org.example.Entities.Geography.Sucursal;
 import java.util.List;
 
 public class SucursalDAOImplHibernate implements SucursalDAO {
-    private EntityManager em = ConexionJPA.getEmf();
+    private final EntityManager em = ConexionJPA.getEmf();
 
     @Override
     public Sucursal buscarSucursalPorNombre(String nombre) {
         Sucursal sucursal;
         try {
             em.getTransaction().begin();
-            sucursal  = em.find(Sucursal.class,nombre);
+            sucursal = em.find(Sucursal.class, nombre);
             System.out.println("Se busco la sucursal con nombre: " + nombre + " con exito: " + sucursal);
             em.getTransaction().commit();
-            if(sucursal != null){
+            if (sucursal != null) {
                 return sucursal;
-            }else{
+            } else {
                 System.out.println("No se encontro la sucursal con nombre: " + nombre);
             }
         } catch (RuntimeException e) {
@@ -32,7 +32,7 @@ public class SucursalDAOImplHibernate implements SucursalDAO {
 
     @Override
     public void guardar(Sucursal entidad) {
-        try{
+        try {
             em.getTransaction().begin();
             em.persist(entidad);
             em.getTransaction().commit();
@@ -46,11 +46,11 @@ public class SucursalDAOImplHibernate implements SucursalDAO {
     public Sucursal buscarPorId(Sucursal entidad) {
         Sucursal sucursal;
         try {
-            sucursal = em.find(Sucursal.class,entidad.getId() );
+            sucursal = em.find(Sucursal.class, entidad.getId());
             System.out.println("Se busco la sucursal con id: " + entidad.getId() + " con exito: " + sucursal);
-            if(sucursal == null){
+            if (sucursal == null) {
                 System.out.println("No se encontro la sucursal con id: " + entidad.getId());
-            }else{
+            } else {
                 System.out.println("Se encontro la sucursal con id: " + entidad.getId());
             }
         } catch (RuntimeException e) {
@@ -67,9 +67,9 @@ public class SucursalDAOImplHibernate implements SucursalDAO {
         try {
             sucursales = em.createQuery("SELECT s FROM Sucursal s", Sucursal.class).getResultList();
             System.out.println("Se buscaron todas las sucursales con exito: " + sucursales.size() + " sucursales encontradas");
-            if(sucursales.isEmpty()){
+            if (sucursales.isEmpty()) {
                 System.out.println("No hay sucursales registradas");
-            }else{
+            } else {
                 sucursales.forEach(sucursal -> System.out.println("Sucursal encontrada: " + sucursal.getNombre()));
             }
         } catch (RuntimeException e) {

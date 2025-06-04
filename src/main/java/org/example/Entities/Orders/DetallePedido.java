@@ -1,7 +1,12 @@
 package org.example.Entities.Orders;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.example.Entities.Articles.Articulo;
 import org.example.Entities.Base;
 
@@ -19,5 +24,6 @@ public class DetallePedido extends Base {
     private Articulo articulo;
     //Pedido
     @ManyToOne
+    @JoinColumn(name = "pedido_id")
     private Pedido pedido;
 }
