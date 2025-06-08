@@ -3,19 +3,20 @@ package org.example.Entities.Articles;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "articulomanufacturado")
-
+@SuperBuilder
 public class ArticuloManufacturado extends Articulo {
     private String descripcion;
     private int tiempoEstimadoMinutos;
@@ -24,7 +25,15 @@ public class ArticuloManufacturado extends Articulo {
     //Articulo Manufacturado Detalle Relacion OnetoMany
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "articulo_manufacturado_detalle_id")
-    private Set<ArticuloManufacturadoDetalle> articulos;
+    @Builder.Default
+    private Set<ArticuloManufacturadoDetalle> articulos = new HashSet<>();
 
+    public void addArticuloManufacturadoDetalle(ArticuloManufacturadoDetalle detalle) {
+        this.articulos.add(detalle);
+    }
+
+    public void removeArticuloManufacturadoDetalle(ArticuloManufacturadoDetalle detalle) {
+        this.articulos.remove(detalle);
+    }
 
 }

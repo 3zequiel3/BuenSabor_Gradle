@@ -2,7 +2,10 @@ package org.example.Entities.Orders;
 
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.example.Entities.Base;
 import org.example.Entities.Enums.Estado;
@@ -16,7 +19,6 @@ import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -83,5 +85,13 @@ public class Pedido extends Base {
     //Eliminar
     public void eliminarDetallePedido(DetallePedido detallePedido) {
         this.detallePedido.remove(detallePedido);
+    }
+
+    public void calcularTotalPedido() {
+        double total = 0;
+        for (DetallePedido detallePedido : detallePedido) {
+            total += detallePedido.getSubtotal();
+        }
+        this.total = total;
     }
 }

@@ -3,7 +3,6 @@ package org.example.Entities.Geography;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.example.Entities.Base;
@@ -11,7 +10,6 @@ import org.example.Entities.Base;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @SuperBuilder
 @Table(name = "domicilios")
@@ -25,6 +23,7 @@ public class Domicilio extends Base {
 
     //Localidad
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "localidad_id")
     private Localidad localidad;
 
 

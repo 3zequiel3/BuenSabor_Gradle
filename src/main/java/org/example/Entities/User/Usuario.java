@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.example.Entities.Base;
 
 @EqualsAndHashCode(callSuper = true)
@@ -15,6 +16,7 @@ import org.example.Entities.Base;
 @NoArgsConstructor
 @Entity
 @Table(name = "usuarios")
+@SuperBuilder
 public class Usuario extends Base {
     @Column(nullable = false)
     private String aunthID;

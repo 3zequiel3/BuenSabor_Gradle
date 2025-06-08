@@ -3,16 +3,18 @@ package org.example.Entities.Geography;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.example.Entities.Base;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 @SuperBuilder
 @Entity
 @Table(name = "localidades")
@@ -23,6 +25,10 @@ public class Localidad extends Base {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "provincia_id")
     private Provincia provincia;
+
+    @OneToMany(mappedBy = "localidad")
+    @Builder.Default
+    private Set<Domicilio> domicilios = new HashSet<>();
 
     //Metodos
     //Domicilio

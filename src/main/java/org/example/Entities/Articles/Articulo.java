@@ -2,12 +2,12 @@ package org.example.Entities.Articles;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.example.Entities.Base;
 import org.example.Entities.Imagen;
-import org.example.Entities.Orders.DetallePedido;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +15,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@SuperBuilder
 @Entity
 public abstract class Articulo extends Base {
     @Column(nullable = false)
@@ -25,7 +25,8 @@ public abstract class Articulo extends Base {
 
     //Imagenes
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn()
+    @JoinColumn(name = "imagen_id")
+    @Builder.Default
     protected Set<Imagen> imagenes = new HashSet<>();
 
     //UnidadMedida
@@ -33,7 +34,13 @@ public abstract class Articulo extends Base {
     protected UnidadMedida unidadMedida;
 
 
-    //Detalle Pedido
-    @OneToMany(mappedBy = "articulo")
-    private Set<DetallePedido> detallePedidos;
+    public void añadirImagenes(Imagen imagen) {
+        this.getImagenes().add(imagen);
+    }
+
+    public void eliminarImagenes(Imagen imagen) {
+        this.getImagenes().remove(imagen);
+    }
+
+
 }

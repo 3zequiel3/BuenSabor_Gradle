@@ -1,10 +1,8 @@
 package org.example.Entities.User;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.example.Entities.Base;
 import org.example.Entities.Geography.Domicilio;
 import org.example.Entities.Imagen;
@@ -18,6 +16,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@SuperBuilder
 @Entity
 @Table(name = "clientes")
 public class Cliente extends Base {
@@ -37,6 +36,7 @@ public class Cliente extends Base {
     @JoinTable(name = "pedido_id",
             joinColumns = @JoinColumn(name = "cliente_id"),
             inverseJoinColumns = @JoinColumn(name = "pedido_id"))
+    @Builder.Default
     private Set<Pedido> pedidos = new HashSet<>();
 
     //Domicilio
@@ -44,6 +44,7 @@ public class Cliente extends Base {
     @JoinTable(name = "cliente_id",
             joinColumns = @JoinColumn(name = "cliente_id"),
             inverseJoinColumns = @JoinColumn(name = "domicilio_id"))
+    @Builder.Default
     private Set<Domicilio> domicilios = new HashSet<>();
 
 
@@ -55,4 +56,28 @@ public class Cliente extends Base {
     //Imagen
     @ManyToOne(cascade = CascadeType.ALL)
     private Imagen imagen;
+
+    public void addDomicilio(Domicilio d) {
+        this.domicilios.add(d);
+    }
+
+    public void addPedido(Pedido p) {
+        this.pedidos.add(p);
+    }
+
+    public void addImagen(Imagen i) {
+        this.imagen = i;
+    }
+
+    public void removePedido(Pedido p) {
+        this.pedidos.remove(p);
+    }
+
+    public void removeImagen(Imagen i) {
+        this.imagen = null;
+    }
+
+    public void removeDomicilio(Domicilio d) {
+        this.domicilios.remove(d);
+    }
 }

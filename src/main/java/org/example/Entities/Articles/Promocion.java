@@ -1,7 +1,10 @@
 package org.example.Entities.Articles;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.example.Entities.Base;
 import org.example.Entities.Enums.TipoPromocion;
@@ -15,7 +18,6 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "promociones")
 @SuperBuilder
@@ -46,6 +48,7 @@ public class Promocion extends Base {
     private double precioPromocional;
 
     //Tipo Promocion Enum
+    @Enumerated(EnumType.STRING)
     private TipoPromocion tipoPromocion;
 
 
@@ -60,5 +63,14 @@ public class Promocion extends Base {
     //Imagen
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Imagen imagen;
+
+
+    public void addArticulo(Articulo articulo) {
+        articulos.add(articulo);
+    }
+
+    public void removeArticulo(Articulo articulo) {
+        articulos.remove(articulo);
+    }
 
 }

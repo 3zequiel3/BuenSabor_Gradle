@@ -2,36 +2,52 @@ package org.example.Entities.Articles;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.example.Entities.Base;
-import org.example.Entities.Geography.Sucursal;
 
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 @Entity
+@SuperBuilder
 public class Categoria extends Base {
     private String denominacion;
 
 
     //Sucursales
-    @ManyToMany(mappedBy = "categorias")
-    private Set<Sucursal> sucursales;
     @ManyToOne
     @JoinColumn(name = "categoria_padre_id")
     private Categoria categoriaPadre;
 
     @OneToMany(mappedBy = "categoriaPadre", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Categoria> categoriasHijas;
+    @Builder.Default
+    private Set<Categoria> categoriasHijas = new HashSet<>();
 
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Articulo> articulos;
+    @Builder.Default
+    private Set<Articulo> articulos = new HashSet<>();
+
+    public void addCategoriaHija(Categoria c) {
+        this.categoriasHijas.add(c);
+    }
+
+    public void removeCategoriaHija(Categoria c) {
+        this.categoriasHijas.remove(c);
+    }
+
+    public void addArticulo(Articulo a) {
+        this.articulos.add(a);
+    }
+
+    public void removeArticulo(Articulo a) {
+        this.articulos.remove(a);
+    }
 
 }
 

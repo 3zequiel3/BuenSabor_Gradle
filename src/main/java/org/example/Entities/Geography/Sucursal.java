@@ -1,7 +1,10 @@
 package org.example.Entities.Geography;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.example.Entities.Articles.Categoria;
 import org.example.Entities.Articles.Promocion;
@@ -16,7 +19,6 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "sucursales")
 @SuperBuilder
