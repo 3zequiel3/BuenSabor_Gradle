@@ -33,7 +33,7 @@ public class Cliente extends Base {
 
     //Pedidios
     @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinTable(name = "pedido_id",
+    @JoinTable(name = "cliente_pedido",
             joinColumns = @JoinColumn(name = "cliente_id"),
             inverseJoinColumns = @JoinColumn(name = "pedido_id"))
     @Builder.Default
@@ -41,7 +41,7 @@ public class Cliente extends Base {
 
     //Domicilio
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "cliente_id",
+    @JoinTable(name = "cliente_domicilio",
             joinColumns = @JoinColumn(name = "cliente_id"),
             inverseJoinColumns = @JoinColumn(name = "domicilio_id"))
     @Builder.Default
@@ -50,7 +50,9 @@ public class Cliente extends Base {
 
     //Usuario
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "usuario_id")
+    @JoinTable(name = "cliente_usuario",
+            joinColumns = @JoinColumn(name = "cliente_id"),
+            inverseJoinColumns = @JoinColumn(name = "usuario_id"))
     private Usuario usuario;
 
     //Imagen

@@ -11,8 +11,6 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @Entity
 @SuperBuilder
-@Table(name = "articuloinsumo")
-
 public class ArticuloInsumo extends Articulo {
     private double precioCompra;
     private int stockActual;

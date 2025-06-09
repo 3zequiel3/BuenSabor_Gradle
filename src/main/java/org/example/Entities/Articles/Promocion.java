@@ -52,7 +52,7 @@ public class Promocion extends Base {
 
     // n:n Articulo
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "articulo_id",
+    @JoinTable(name = "promocion_articulo",
             joinColumns = @JoinColumn(name = "promocion_id"),
             inverseJoinColumns = @JoinColumn(name = "articulo_id"))
     @Builder.Default
@@ -61,7 +61,7 @@ public class Promocion extends Base {
     //Imagen
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Builder.Default
-    @JoinTable(name = "imagen_id",
+    @JoinTable(name = "promocion_imagen",
                 joinColumns = @JoinColumn(name= "promocion_id"),
                 inverseJoinColumns = @JoinColumn(name = "imagen_id"))
     private Set<Imagen> imagenes = new HashSet<>();

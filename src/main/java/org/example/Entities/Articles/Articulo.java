@@ -15,6 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @SuperBuilder
+@Table(name = "articulos")
 public abstract class Articulo extends Base {
     @Column(nullable = false)
     protected String denominaminacion;

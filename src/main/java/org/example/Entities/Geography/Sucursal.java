@@ -39,7 +39,7 @@ public class Sucursal extends Base {
 
     //Promociones
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "sucursal_id",
+    @JoinTable(name = "sucursal_promocion",
             joinColumns = @JoinColumn(name = "sucursal_id"),
             inverseJoinColumns = @JoinColumn(name = "promocion_id"))
     @Builder.Default
@@ -47,7 +47,7 @@ public class Sucursal extends Base {
 
     //Categorias
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "sucursal_id",
+    @JoinTable(name = "sucursal_categorias",
             joinColumns = @JoinColumn(name = "sucursal_id"),
             inverseJoinColumns = @JoinColumn(name = "categoria_id"))
     @Builder.Default

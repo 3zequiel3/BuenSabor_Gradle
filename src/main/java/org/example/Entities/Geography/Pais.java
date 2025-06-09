@@ -1,6 +1,7 @@
 package org.example.Entities.Geography;
 
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -21,7 +22,7 @@ import java.util.Set;
 public class Pais extends Base {
     private String nombre;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @Builder.Default
     private Set<Provincia> provincias = new HashSet<>();
 

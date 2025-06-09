@@ -14,7 +14,6 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @SuperBuilder
-@Table(name = "articulomanufacturado")
 public class ArticuloManufacturado extends Articulo {
     private String descripcion;
     private int tiempoEstimadoMinutos;
