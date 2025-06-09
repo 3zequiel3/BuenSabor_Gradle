@@ -12,12 +12,12 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-@SuperBuilder
+@AllArgsConstructor
 @Entity
+@SuperBuilder
 @Table(name = "clientes")
 public class Cliente extends Base {
     @Column(nullable = false)
@@ -32,7 +32,7 @@ public class Cliente extends Base {
     private LocalDate fechaNacimiento;
 
     //Pedidios
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinTable(name = "pedido_id",
             joinColumns = @JoinColumn(name = "cliente_id"),
             inverseJoinColumns = @JoinColumn(name = "pedido_id"))
@@ -54,7 +54,7 @@ public class Cliente extends Base {
     private Usuario usuario;
 
     //Imagen
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private Imagen imagen;
 
     public void addDomicilio(Domicilio d) {

@@ -1,5 +1,6 @@
 package org.example.Entities.Articles;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import lombok.*;
@@ -16,9 +17,7 @@ public class ArticuloManufacturadoDetalle extends Base {
     private int cantidad;
 
     //ArticuloInsumo
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private ArticuloInsumo articuloInsumo;
 
-    @ManyToOne
-    private ArticuloManufacturado articuloManufacturado;
 }

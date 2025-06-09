@@ -24,14 +24,14 @@ public class ArticuloManufacturado extends Articulo {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "articulo_manufacturado_detalle_id")
     @Builder.Default
-    private Set<ArticuloManufacturadoDetalle> articulos = new HashSet<>();
+    private Set<ArticuloManufacturadoDetalle> detalles = new HashSet<>();
 
     public void addArticuloManufacturadoDetalle(ArticuloManufacturadoDetalle detalle) {
-        this.articulos.add(detalle);
+        this.detalles.add(detalle);
     }
 
     public void removeArticuloManufacturadoDetalle(ArticuloManufacturadoDetalle detalle) {
-        this.articulos.remove(detalle);
+        this.detalles.remove(detalle);
     }
 
 }

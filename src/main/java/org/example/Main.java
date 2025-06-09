@@ -1,17 +1,15 @@
 package org.example;
 
-import org.example.Entities.Articles.*;
-import org.example.Entities.Enums.Estado;
-import org.example.Entities.Enums.FormaPago;
-import org.example.Entities.Enums.TipoEnvio;
-import org.example.Entities.Enums.TipoPromocion;
+import jakarta.persistence.EntityManager;
+import org.example.Entities.Connection.ConexionJPA;
+import org.example.Entities.Connection.Implementacion.EmpresaDAOImpl;
+import org.example.Entities.Connection.Implementacion.SucursalDAOImplHibernate;
 import org.example.Entities.Geography.*;
+import org.example.Entities.Articles.*;
+import org.example.Entities.Orders.*;
+import org.example.Entities.User.*;
 import org.example.Entities.Imagen;
-import org.example.Entities.Orders.DetallePedido;
-import org.example.Entities.Orders.Factura;
-import org.example.Entities.Orders.Pedido;
-import org.example.Entities.User.Cliente;
-import org.example.Entities.User.Usuario;
+import org.example.Entities.Enums.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -40,7 +38,6 @@ public class Main {
                 .horarioCierre(LocalTime.of(18, 0))
                 .domicilio(domicilio)
                 .build();
-
         empresa.añadirSucursal(sucursal);
 
         // 3. Unidad de medida
@@ -75,6 +72,7 @@ public class Main {
                 .unidadMedida(unidad)
                 .build();
         manufacturado.addArticuloManufacturadoDetalle(detalleManu);
+
         // 6. Imagen para Promoción y Cliente
         Imagen promoImg = Imagen.builder().denominacion("promo1.jpg").build();
         Imagen clienteImg = Imagen.builder().denominacion("cliente1.jpg").build();
@@ -88,13 +86,11 @@ public class Main {
                 .descripcionDescuento("20% off desayuno")
                 .precioPromocional(150.0)
                 .tipoPromocion(TipoPromocion.HAPPYHOUR)
-                .imagen(promoImg)
                 .build();
         promo.addArticulo(manufacturado);
-
+        promo.addImagen(promoImg);
         sucursal.añadirPromocion(promo);
 
-        // 8. Usuario y Cliente
         Usuario usuario = Usuario.builder()
                 .aunthID("auth123")
                 .username("jdoe")
@@ -110,7 +106,6 @@ public class Main {
                 .imagen(clienteImg)
                 .build();
 
-        // 9. Factura, Pedido y DetallePedido
         Factura factura = Factura.builder()
                 .fechaFacturacion(LocalDate.now())
                 .mpPaymentId(999)
@@ -127,24 +122,35 @@ public class Main {
                 .totalCosto(200.0)
                 .fechaPedido(LocalDate.now())
                 .estado(Estado.PENDIENTE)
-                .tipoEnvio(TipoEnvio.DELIBERY) // Ojo: typo en enum, debería ser DELIVERY!
+                .tipoEnvio(TipoEnvio.DELIBERY)
                 .formaPago(FormaPago.EFECTIVO)
                 .domicilio(domicilio)
                 .sucursal(sucursal)
                 .build();
         pedido.setFactura(factura);
 
-        DetallePedido detalle = DetallePedido.builder()
+        DetallePedido detallePedido = DetallePedido.builder()
                 .cantidad(1)
                 .subtotal(200.0)
                 .pedido(pedido)
                 .build();
-        detalle.addArticulo(manufacturado);
-        pedido.añadirDetallePedido(detalle);
+        detallePedido.addArticulo(manufacturado);
+        pedido.añadirDetallePedido(detallePedido);
 
         cliente.getPedidos().add(pedido);
         cliente.getDomicilios().add(domicilio);
 
-        System.out.println("Datos de ejemplo creados correctamente. Listos para guardar en base de datos.");
+        // GUARDAR Empresa POR JDBC (DAO)
+        EmpresaDAOImpl empresaDAO = new EmpresaDAOImpl();
+        empresaDAO.guardar(empresa);
+        System.out.println("Empresa guardada en base de datos (JDBC)");
+
+        // GUARDAR Sucursal POR JPA (DAO)
+
+        SucursalDAOImplHibernate sucursalDAO = new SucursalDAOImplHibernate();
+        sucursalDAO.guardar(sucursal);
+        System.out.println("Sucursal guardada en base de datos (JPA)");
+
+        System.out.println("Datos de ejemplo creados y guardados correctamente.");
     }
 }

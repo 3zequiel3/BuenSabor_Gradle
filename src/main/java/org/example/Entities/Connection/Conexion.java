@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class Conexion {
     public static Connection ConectarBD() {
         Connection conexion;
-        String url = "jdbc:mysql://localhost:3306/buensabor";
+        String url = "jdbc:mysql://localhost:3306/BuenSabor";
         String usuario = "root";
         String password = "";
         try {

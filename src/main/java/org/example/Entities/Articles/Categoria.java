@@ -27,7 +27,8 @@ public class Categoria extends Base {
     @Builder.Default
     private Set<Categoria> categoriasHijas = new HashSet<>();
 
-    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "articulo_id")
     @Builder.Default
     private Set<Articulo> articulos = new HashSet<>();
 

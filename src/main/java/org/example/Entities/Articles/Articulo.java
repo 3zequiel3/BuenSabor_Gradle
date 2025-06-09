@@ -28,7 +28,7 @@ public abstract class Articulo extends Base {
     protected Set<Imagen> imagenes = new HashSet<>();
 
     //UnidadMedida
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     protected UnidadMedida unidadMedida;
 
 

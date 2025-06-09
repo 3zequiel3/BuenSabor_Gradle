@@ -24,7 +24,7 @@ public class DetallePedido extends Base {
     @Builder.Default
     private Set<Articulo> articulos = new HashSet<>();
     //Pedido
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
 

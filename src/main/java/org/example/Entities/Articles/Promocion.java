@@ -51,7 +51,7 @@ public class Promocion extends Base {
 
 
     // n:n Articulo
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "articulo_id",
             joinColumns = @JoinColumn(name = "promocion_id"),
             inverseJoinColumns = @JoinColumn(name = "articulo_id"))
@@ -59,8 +59,12 @@ public class Promocion extends Base {
     private Set<Articulo> articulos = new HashSet<>();
 
     //Imagen
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Imagen imagen;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Builder.Default
+    @JoinTable(name = "imagen_id",
+                joinColumns = @JoinColumn(name= "promocion_id"),
+                inverseJoinColumns = @JoinColumn(name = "imagen_id"))
+    private Set<Imagen> imagenes = new HashSet<>();
 
 
     public void addArticulo(Articulo articulo) {
@@ -69,6 +73,12 @@ public class Promocion extends Base {
 
     public void removeArticulo(Articulo articulo) {
         articulos.remove(articulo);
+    }
+    public void addImagen(Imagen imagen) {
+        this.imagenes.add(imagen);
+    }
+    public void removeImagen(Imagen imagen) {
+        this.imagenes.remove(imagen);
     }
 
 }

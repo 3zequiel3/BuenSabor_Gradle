@@ -38,7 +38,7 @@ public class Sucursal extends Base {
     private Domicilio domicilio;
 
     //Promociones
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "sucursal_id",
             joinColumns = @JoinColumn(name = "sucursal_id"),
             inverseJoinColumns = @JoinColumn(name = "promocion_id"))
@@ -46,7 +46,7 @@ public class Sucursal extends Base {
     private Set<Promocion> promociones = new HashSet<>();
 
     //Categorias
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "sucursal_id",
             joinColumns = @JoinColumn(name = "sucursal_id"),
             inverseJoinColumns = @JoinColumn(name = "categoria_id"))

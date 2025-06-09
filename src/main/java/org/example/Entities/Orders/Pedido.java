@@ -68,7 +68,7 @@ public class Pedido extends Base {
     private Domicilio domicilio;
 
     //Sucursal
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "sucursal_id")
     private Sucursal sucursal;
 
