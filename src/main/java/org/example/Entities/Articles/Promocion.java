@@ -1,10 +1,7 @@
 package org.example.Entities.Articles;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.example.Entities.Base;
 import org.example.Entities.Enums.TipoPromocion;
@@ -15,12 +12,13 @@ import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "promociones")
 @SuperBuilder
+@Table(name = "promociones")
 public class Promocion extends Base {
     @Column(nullable = false)
     private String denominacion;

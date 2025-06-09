@@ -2,10 +2,7 @@ package org.example.Entities.Orders;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.example.Entities.Base;
 import org.example.Entities.Enums.Estado;
@@ -19,11 +16,12 @@ import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-@SuperBuilder
+@AllArgsConstructor
 @Entity
+@SuperBuilder
 @Table(name = "pedidos")
 public class Pedido extends Base {
     @Column(nullable = false)

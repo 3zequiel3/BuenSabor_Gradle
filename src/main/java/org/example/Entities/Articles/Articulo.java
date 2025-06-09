@@ -1,10 +1,7 @@
 package org.example.Entities.Articles;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.example.Entities.Base;
 import org.example.Entities.Imagen;
@@ -12,11 +9,12 @@ import org.example.Entities.Imagen;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-@SuperBuilder
+@AllArgsConstructor
 @Entity
+@SuperBuilder
 public abstract class Articulo extends Base {
     @Column(nullable = false)
     protected String denominaminacion;

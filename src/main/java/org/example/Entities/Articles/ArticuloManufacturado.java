@@ -2,21 +2,19 @@ package org.example.Entities.Articles;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "articulomanufacturado")
 @SuperBuilder
+@Table(name = "articulomanufacturado")
 public class ArticuloManufacturado extends Articulo {
     private String descripcion;
     private int tiempoEstimadoMinutos;

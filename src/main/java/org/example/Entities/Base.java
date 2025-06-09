@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @MappedSuperclass
 @SuperBuilder
 public abstract class Base {

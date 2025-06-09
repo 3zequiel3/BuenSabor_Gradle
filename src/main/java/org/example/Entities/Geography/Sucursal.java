@@ -1,10 +1,7 @@
 package org.example.Entities.Geography;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.example.Entities.Articles.Categoria;
 import org.example.Entities.Articles.Promocion;
@@ -16,12 +13,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "sucursales")
 @SuperBuilder
+@Table(name = "sucursales")
 public class Sucursal extends Base {
     @Column(unique = true, nullable = false)
     private String nombre;

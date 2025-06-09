@@ -2,17 +2,14 @@ package org.example.Entities.Articles;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.example.Entities.Base;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true, exclude = {"articuloInsumo"})
+@AllArgsConstructor
 @Entity
 @SuperBuilder
 public class ArticuloManufacturadoDetalle extends Base {

@@ -8,12 +8,12 @@ import org.example.Entities.Base;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true, exclude = {"pais", "localidades"})
-@SuperBuilder
+@AllArgsConstructor
 @Entity
+@SuperBuilder
 @Table(name = "provincias")
 public class Provincia extends Base {
     private String nombre;
